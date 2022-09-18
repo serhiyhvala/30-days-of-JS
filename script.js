@@ -1,53 +1,17 @@
-const textarea = document.querySelector('#text')
-let voiceList = document.querySelector('#voice')
-let speechBtn = document.querySelector('.submit')
-
-let synth = speechSynthesis
-let isSpeaking = true
-
-function voiceSpeech() {
-    for (let voice of synth.getVoices()) {
-        let option = document.createElement('option')
-        option.text = voice.name
-        voiceList.add(option)
-        console.log(option);
+let password = document.getElementById('password')
+function genPassword() {
+    let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let passwordLength = 12
+    let password = '';
+    for (let i = 0; i <= passwordLength; i++){
+        let randomNumber = Math.floor(Math.random()*chars.length)
+        password += chars.substring(randomNumber, randomNumber + 1)
     }
+    document.getElementById('password').value = password
 }
-synth.addEventListener('voiceChanged', voiceSpeech)
-
-function textToSpeech(text){
-    let utternance = new SpeechSynthesisUtterance(text)
-    for (let voice of synth.getVoices()) {
-        if (voice.name === voiceList.value) {
-            utternance.voice = voice
-        }
-    }
-    speechSynthesis.speak(utternance)
+function copyPassword() {
+    let copyText = document.getElementById('password')
+    copyText.select()
+    copyText.setSelectionRange(0, 999)
+    document.execCommand('copy')
 }
-speechBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    if(textarea.value != '') {
-        if(!synth.speaking) {
-            textToSpeech(textarea.value)
-        }
-        if (textarea.value.length > 80) {
-            if(isSpeaking) {
-                synth.resume()
-                isSpeaking = false
-                speechBtn.innerHTML = 'Pause Speech'
-            } else {
-                synth.pause()
-                isSpeaking = true
-                speechBtn.innerHTML = 'Resume Speech'
-            }
-            setInterval(() => {
-                if(!synth.speaking && !isSpeaking) {
-                    isSpeaking = true
-                    speechBtn.innerHTML = 'Convert To Speeach'
-                }
-            })
-        } else {
-            speechBtn.innerHTML = 'Convert To Speech'
-        }
-    }
-})

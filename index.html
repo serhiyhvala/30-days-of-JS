@@ -7,20 +7,18 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <main>
-        <p class="title">Text To Speech</p>
-        <div class="text-section">
-            <p class="text-title">Enter Text</p>
-            <textarea name="" id="text"></textarea>
-        </div>
-        <div class="voice-section">
-            <p class="voice-title">Select Voice</p>
-            <select name="" id="voice">
-                <option value="Google US English">Google US English</option>
-            </select>
-        </div>
-        <button class="submit">Convert To Speech</button>
-    </main>
+    <div class="box">
+        <h2>Random Passwrod</h2>
+        <input type="text" placeholder="Create Password" id="password" readonly/>
+        <table>
+            <th>
+                <div id="button" class="btn1" onclick="genPassword()">Generate</div>
+            </th>
+            <th>
+                <a id="button" class="btn2" onclick="copyPassword()">Copy</a>
+            </th>
+        </table>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
