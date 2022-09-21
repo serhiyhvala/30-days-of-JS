@@ -1,53 +1,29 @@
-const textarea = document.querySelector('#text')
-let voiceList = document.querySelector('#voice')
-let speechBtn = document.querySelector('.submit')
-
-let synth = speechSynthesis
-let isSpeaking = true
-
-function voiceSpeech() {
-    for (let voice of synth.getVoices()) {
-        let option = document.createElement('option')
-        option.text = voice.name
-        voiceList.add(option)
-        console.log(option);
+const calculate = document.querySelector('.calculate')
+calculate.addEventListener('click', (e) => {
+    let entereddate = new Date(document.querySelector('.date').value)
+    let inputdate = {
+        year: entereddate.getFullYear(),
+        month:  entereddate.getMonth(),
+        day: entereddate.getDay(),
     }
-}
-synth.addEventListener('voiceChanged', voiceSpeech)
+    let date = new Date()
+    let d2 = date.getDate()
+    let m2 = 1 + date.getMonth()
+    let y2 = date.getFullYear()
+    let month = [31,28,31,30,31,30,31,31,30,31,30,31]
+    if(inputdate.day > d2) {
+        d2 = d2 + month[m2 - 1]
+        m2 -= 1
+    }
+    if(inputdate.month > m2) {
+        m2 += 12
+        y2 -= 1
+    }
+    let d = d2 - inputdate.day
+    let m = m2 - inputdate.month
+    let y = y2 - inputdate.year
 
-function textToSpeech(text){
-    let utternance = new SpeechSynthesisUtterance(text)
-    for (let voice of synth.getVoices()) {
-        if (voice.name === voiceList.value) {
-            utternance.voice = voice
-        }
-    }
-    speechSynthesis.speak(utternance)
-}
-speechBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    if(textarea.value != '') {
-        if(!synth.speaking) {
-            textToSpeech(textarea.value)
-        }
-        if (textarea.value.length > 80) {
-            if(isSpeaking) {
-                synth.resume()
-                isSpeaking = false
-                speechBtn.innerHTML = 'Pause Speech'
-            } else {
-                synth.pause()
-                isSpeaking = true
-                speechBtn.innerHTML = 'Resume Speech'
-            }
-            setInterval(() => {
-                if(!synth.speaking && !isSpeaking) {
-                    isSpeaking = true
-                    speechBtn.innerHTML = 'Convert To Speeach'
-                }
-            })
-        } else {
-            speechBtn.innerHTML = 'Convert To Speech'
-        }
-    }
+    let year = (document.querySelector('.year').innerHTML = y)
+    let months = (document.querySelector('.month').innerHTML = m)
+    let day = (document.querySelector('.day').innerHTML = d)
 })
