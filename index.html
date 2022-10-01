@@ -1,74 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+		initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <title>Parking Management</title>
-</head>
+    <title>Crack-The-Code Game</title>
 
-<body style="background-color:lightblue;">
-    <header class="shadow">
-        <div class="header-content d-flex justify-content-center p-2">
-            <img src="https://i.postimg.cc/cJDCZ6dg/parking-removebg-preview.png" alt="" id="header-logo">
-            <div id="header-msg" class="ps-3 ml-5 align-self-center">Parking Management</div>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/788fc8cac3.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        font-family: 'Yeon Sung', cursive;
+      }
+
+      body {
+        background-color: rgb(179, 188, 188);
+      }
+
+      input {
+        width: 60px;
+        height: 40px;
+        border-radius: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="modal fade"
+      id="popup"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="popupLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title text-danger font-weight-bold"
+              id="popupLabel"
+            >
+              Pop Up
+            </h5>
+
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3 id="result" class="text-center"></h3>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
-    </header>
-    <div class="form-container mt-5">
-        <form class="w-50 mx-auto" id="entryForm">
-            <h5 class="text-center">Add Car to Parking Lot</h5>
-            <div class="form-group">
-                <label for="owner">Owner:</label>
-                <input type="text" class="form-control rounded-0 shadow-sm" id="owner" placeholder="Owner">
-            </div>
-            <div class="form-group">
-                <label for="car">Car:</label>
-                <input type="text" class="form-control rounded-0 shadow-sm" id="car" placeholder="Car">
-            </div>
-            <div class="form-group">
-                <label for="licensePlate">License Plate:</label>
-                <input type="text" class="form-control rounded-0 shadow-sm" id="licensePlate" placeholder="NN-NN-LL,NN-LL-NN,....etc">
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <label for="entryDate">Entry Date:</label>
-                    <input type="date" class="form-control rounded-0 shadow-sm" id="entryDate">
-                </div>
-                <div class="col-6">
-                    <label for="exitDate">Exit Date:</label>
-                    <input type="date" class="form-control rounded-0 shadow-sm" id="exitDate">
-                </div>
-            </div>
-            <button type="submit" class="btn mx-auto d-block mt-5 rounded-0 shadow" id="btnOne">Add Car</button>
-        </form>
-    </div>
-    <div class="table-container mt-5 mb-5 w-75 mx-auto" >
-            <h5 class="text-center mb-3">List of Cars in Parking Lot</h5>
-            <input type="text" class="w-100 mb-3" id="searchInput" placeholder="Search...">
-            <table class="table table-striped shadow " id="parkingTable">
-                    <thead class="text-white" id="tableHead">
-                      <tr>
-                        <th scope="col">Owner</th>
-                        <th scope="col">Car</th>
-                        <th scope="col">License Plate</th>
-                        <th scope="col">Entry Date</th>
-                        <th scope="col">Exit Date</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                     
-                    </tbody>
-                  </table>
+      </div>
     </div>
 
-    <!-- <script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <div class="container my-4">
+      <h1 class="text-center my-4">
+        <i class="fas fa-unlock-alt"></i> Crack The Code
+      </h1>
+
+      <div class="text-center">
+        <input type="text" id="b1" />
+        <input type="text" id="b2" />
+        <input type="text" id="b3" />
+        <br />
+
+        <button
+          class="btn btn-secondary mt-3"
+          style="width: 150px; background-color: rgba(0, 0, 0, 0.569)"
+          onclick="myfunc();"
+        >
+          <i class="fas fa-key"></i> Check
+        </button>
+      </div>
+      <hr />
+
+      <div id="hints" class="row m-auto" ;>
+        <div id="hintOne">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #1
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h1" class="text-center"></p>
+
+              <h5 class="text-center">One Number is correct and well placed</h5>
+            </div>
+          </div>
+        </div>
+        <div id="hintTwo">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #2
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h2" class="text-center"></p>
+
+              <h5 class="text-center">
+                One Number is correct but wrong placed
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div id="hintThree">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #3
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h3" class="text-center"></p>
+
+              <h5 class="text-center">
+                Two numbers are correct but wrong placed
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div id="hintFour">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #4
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h4" class="text-center"></p>
+
+              <h5 class="text-center">
+                One Number is Correct but wrong placed
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div id="hintFive">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #5
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h5" class="text-center"></p>
+
+              <h5 class="text-center">
+                One Number is correct but wrong placed
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div id="hintSix">
+          <div class="card m-4" style="width: 18rem">
+            <div
+              class="card-header card-title"
+              style="background-color: rgb(147, 147, 147); color: aliceblue"
+            >
+              <h5 class="card-title text-center">
+                <i class="far fa-lightbulb"></i>
+                Hint #6
+              </h5>
+            </div>
+            <div class="card-body">
+              <p id="h6" class="text-center"></p>
+
+              <h5 class="text-center">
+                One Number is correct but it is double of original
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer
+      class="footer"
+      style="
+        background-color: gray;
+        height: 4vh;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+      "
+    >
+      <span> Made with </span>
+      <span style="color: red">&hearts;</span>
+      <span> by Serhiy Hvala </span>
+    </footer>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
