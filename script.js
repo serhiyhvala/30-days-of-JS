@@ -1,53 +1,82 @@
-const textarea = document.querySelector('#text')
-let voiceList = document.querySelector('#voice')
-let speechBtn = document.querySelector('.submit')
+let word = document.querySelector('.word')
+let time = document.querySelector('.time')
+let second = 30
+let input = document.querySelector('.input-text')
+const reset = document.querySelector('.refresh-btn')
+const submit = document.querySelector('.submit-btn')
 
-let synth = speechSynthesis
-let isSpeaking = true
+function scrambledword() {
+  let words = [
+    'STICKS',
+    ' STUMPS',
+    ' WEIRDS',
+    'FAZES',
+    'FLUSTERS',
+    'MORTIFIES',
+    'RATTLES',
+    'BOTHERS',
+    'CHAGRINS',
+    'DISMAYS',
+    'DISQUIETS',
+    'DISTURBS',
+    'PERTURBS',
+    ' STUNS',
+    'UNHINGES',
+    'UNSETTLES',
+    'UPSETS',
+  ]
 
-function voiceSpeech() {
-    for (let voice of synth.getVoices()) {
-        let option = document.createElement('option')
-        option.text = voice.name
-        voiceList.add(option)
-        console.log(option);
+  var wordobtain = words[Math.floor(Math.random() * words.length)]
+
+  let RamdomWordString = wordobtain.split('')
+
+  function shuffleArray(array) {
+    for (var i = RamdomWordString.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1))
+
+      var temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
     }
+
+    return array
+  }
+  function show() {
+    var scrambledword = shuffleArray(RamdomWordString)
+
+    word.innerHTML = scrambledword.join('')
+  }
+  show()
+
+  time.innerHTML = `TIME LEFT: ${second}s`
+
+  const countdown = setInterval(() => {
+    second--
+    time.innerHTML = `TIME LEFT: ${second}s`
+
+    submit.addEventListener('click', () => {
+      var x = input.value
+      if (x == '') {
+        alert('Please Enter Something')
+        countdown()
+      } else if (x == wordobtain) {
+        wordobtain != x
+        alert('You Find Correct Word')
+        document.location.reload()
+        scrambledword()
+      }
+    })
+
+    if (second === 0) {
+      clearInterval(countdown)
+      alert('Your Time Is Over')
+      document.location.reload()
+    }
+  }, 1000)
 }
-synth.addEventListener('voiceChanged', voiceSpeech)
 
-function textToSpeech(text){
-    let utternance = new SpeechSynthesisUtterance(text)
-    for (let voice of synth.getVoices()) {
-        if (voice.name === voiceList.value) {
-            utternance.voice = voice
-        }
-    }
-    speechSynthesis.speak(utternance)
-}
-speechBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    if(textarea.value != '') {
-        if(!synth.speaking) {
-            textToSpeech(textarea.value)
-        }
-        if (textarea.value.length > 80) {
-            if(isSpeaking) {
-                synth.resume()
-                isSpeaking = false
-                speechBtn.innerHTML = 'Pause Speech'
-            } else {
-                synth.pause()
-                isSpeaking = true
-                speechBtn.innerHTML = 'Resume Speech'
-            }
-            setInterval(() => {
-                if(!synth.speaking && !isSpeaking) {
-                    isSpeaking = true
-                    speechBtn.innerHTML = 'Convert To Speeach'
-                }
-            })
-        } else {
-            speechBtn.innerHTML = 'Convert To Speech'
-        }
-    }
+window.addEventListener('load', scrambledword)
+reset.addEventListener('click', () => {
+  scrambledword()
+  document.location.reload()
 })
