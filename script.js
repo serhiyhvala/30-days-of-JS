@@ -1,50 +1,82 @@
-let input = document.getElementById('input')
-let result = document.getElementById('result')
-let inputType = document.getElementById('inputType')
-let resultType = document.getElementById('resultType')
-let inputTypeValue, resultTypeValue
+let word = document.querySelector('.word')
+let time = document.querySelector('.time')
+let second = 30
+let input = document.querySelector('.input-text')
+const reset = document.querySelector('.refresh-btn')
+const submit = document.querySelector('.submit-btn')
 
-input.addEventListener('keyup', myResult)
-inputType.addEventListener('change', myResult)
-resultType.addEventListener('change', myResult)
+function scrambledword() {
+  let words = [
+    'STICKS',
+    ' STUMPS',
+    ' WEIRDS',
+    'FAZES',
+    'FLUSTERS',
+    'MORTIFIES',
+    'RATTLES',
+    'BOTHERS',
+    'CHAGRINS',
+    'DISMAYS',
+    'DISQUIETS',
+    'DISTURBS',
+    'PERTURBS',
+    ' STUNS',
+    'UNHINGES',
+    'UNSETTLES',
+    'UPSETS',
+  ]
 
-inputTypeValue = inputType.value
-resultTypeValue = resultType.value
+  var wordobtain = words[Math.floor(Math.random() * words.length)]
 
-function myResult() {
-  inputTypeValue = inputType.value
-  resultTypeValue = resultType.value
+  let RamdomWordString = wordobtain.split('')
 
-  if (inputTypeValue === 'meter' && resultTypeValue === 'kilometer') {
-    result.value = Number(input.value) * 0.001
-  } else if (inputTypeValue === 'meter' && resultTypeValue === 'Centimeter') {
-    result.value = Number(input.value) * 100
-  } else if (inputTypeValue === 'meter' && resultTypeValue === 'meter') {
-    result.value = input.value
+  function shuffleArray(array) {
+    for (var i = RamdomWordString.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1))
+
+      var temp = array[i]
+      array[i] = array[j]
+      array[j] = temp
+    }
+
+    return array
   }
+  function show() {
+    var scrambledword = shuffleArray(RamdomWordString)
 
-  if (inputTypeValue === 'kilometer' && resultTypeValue === 'meter') {
-    result.value = Number(input.value) * 1000
-  } else if (
-    inputTypeValue === 'kilometer' &&
-    resultTypeValue === 'Centimeter'
-  ) {
-    result.value = Number(input.value) * 100000
-  } else if (
-    inputTypeValue === 'kilometer' &&
-    resultTypeValue === 'kilometer'
-  ) {
-    result.value = input.value
+    word.innerHTML = scrambledword.join('')
   }
+  show()
 
-  if (inputTypeValue === 'Centimeter' && resultTypeValue === 'kilometer') {
-    result.value = Number(input.value) * 0.00001
-  } else if (inputTypeValue === 'Centimeter' && resultTypeValue === 'meter') {
-    result.value = Number(input.value) * 0.01
-  } else if (
-    inputTypeValue === 'Centimeter' &&
-    resultTypeValue === 'Centimeter'
-  ) {
-    result.value = input.value
-  }
+  time.innerHTML = `TIME LEFT: ${second}s`
+
+  const countdown = setInterval(() => {
+    second--
+    time.innerHTML = `TIME LEFT: ${second}s`
+
+    submit.addEventListener('click', () => {
+      var x = input.value
+      if (x == '') {
+        alert('Please Enter Something')
+        countdown()
+      } else if (x == wordobtain) {
+        wordobtain != x
+        alert('You Find Correct Word')
+        document.location.reload()
+        scrambledword()
+      }
+    })
+
+    if (second === 0) {
+      clearInterval(countdown)
+      alert('Your Time Is Over')
+      document.location.reload()
+    }
+  }, 1000)
 }
+
+window.addEventListener('load', scrambledword)
+reset.addEventListener('click', () => {
+  scrambledword()
+  document.location.reload()
+})

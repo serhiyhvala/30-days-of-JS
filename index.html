@@ -4,32 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
-    <title>Length Conversion</title>
+    <title>Mini Word Game</title>
+    <link rel="stylesheet" href="main.css">
   </head>
-
   <body>
-    <div class="container">
-      <h1 class="container-title">Length Conversion</h1>
-
-      <div class="content">
-        <input type="number" placeholder="Input" id="input" />
-        <span>=</span>
-        <input type="number" placeholder="Result" id="result" />
-
-        <select id="inputType">
-          <option value="kilometer">Kilometer</option>
-          <option value="meter">Meter</option>
-          <option value="Centimeter">Centimeter</option>
-        </select>
-
-        <select id="resultType">
-          <option value="kilometer">Kilometer</option>
-          <option value="meter">Meter</option>
-          <option value="Centimeter">Centimeter</option>
-        </select>
+    <main>
+      <div class="title">Word Scramble</div>
+      <div class="hr">
+        --------------------------------------------------------
       </div>
-    </div>
+      <div class="scramble-word"><p class="word">trgtgtgggg</p></div>
+      <div class="time"></div>
+      <input
+        type="text"
+        class="input-text"
+        placeholder="Enter a valid word"
+        required
+      />
+
+      <div class="btn">
+        <button class="refresh-btn">Refresh Word</button>
+        <button class="submit-btn">Check word</button>
+      </div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
