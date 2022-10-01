@@ -1,38 +1,88 @@
-*{
-  font-family: 'Roboto', sans-serif;
-  padding:0;
-  margin:0;
-  border:0
+* {
+  padding: 0;
+  margin: 0;
+ 
 }
-header{
-  background-color: rgb(25, 120, 197);
-}
-#header-logo{
-  width:64px;
-  height:64px;
-}
-#header-msg{
-  font-size: 25px;
-  color: white;
-}
-#btnOne{
-  background-color:rgb(25, 120, 197);
-  color:white;
-}
-#btnOne:focus,#btnOne:hover{
-  box-shadow: none;
-  outline:none;
+body{
+  height: 100vh;
+  width: 100vw;
+  background: url(https://i.postimg.cc/Kj2dHrCn/Pngtree-pink-3d-stereo-ball-background-1327975.png) no-repeat center center fixed;
+background-size: cover;
+/*   background:Pink; */
 }
 
-#tableHead{
-  background-color:rgb(25, 120, 197);
+.container {
+  width: 600px;
+  height: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border: 2px double black;
+  border-radius: 7px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
-#searchInput{
-  height: calc(1.5em + .75rem + 2px);
-  padding: .375rem .75rem;
-  border-bottom: 1px solid #ced4da;
+
+.container-title {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 2.5rem;
+  color:crimson;
+  text-decoration: 1px overline gray;
+  transition: 0.3s;
 }
-#searchInput:hover,#searchInput:focus{
-  box-shadow: none;
-  outline:none;
+
+.container-title:hover{
+  font-size: 2.6rem;
 }
+
+.content{
+  margin-top:50px;
+}
+
+input {
+  height: 4vh;
+  width: 35%;
+  padding-left: 10px;
+  border-radius: 5px;
+  background: none;
+  outline: none;
+  font-size: 1.1rem;
+}
+
+#input {
+  margin-left: 4rem;
+}
+
+#input:hover,#result:hover{
+  /* border-color: #0055ff; */
+  border-color:crimson;
+}
+
+span {
+  font-size: 1.5rem;
+  margin: 0.3rem;
+  /* color: #0055ff; */
+}
+
+#inputType,#resultType {
+  height: 4vh;
+  width: 10vw;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  /* color: royalblue; */
+  color: crimson;
+  border: 3px double gray;
+  border-radius: 5px;
+  background: none;
+
+}
+
+#inputType{
+  margin: 10px 17%;
+}
+
