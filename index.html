@@ -1,26 +1,35 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <main>
-        <p class="title">Text To Speech</p>
-        <div class="text-section">
-            <p class="text-title">Enter Text</p>
-            <textarea name="" id="text"></textarea>
-        </div>
-        <div class="voice-section">
-            <p class="voice-title">Select Voice</p>
-            <select name="" id="voice">
-                <option value="Google US English">Google US English</option>
-            </select>
-        </div>
-        <button class="submit">Convert To Speech</button>
-    </main>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>Length Conversion</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="container-title">Length Conversion</h1>
+
+      <div class="content">
+        <input type="number" placeholder="Input" id="input" />
+        <span>=</span>
+        <input type="number" placeholder="Result" id="result" />
+
+        <select id="inputType">
+          <option value="kilometer">Kilometer</option>
+          <option value="meter">Meter</option>
+          <option value="Centimeter">Centimeter</option>
+        </select>
+
+        <select id="resultType">
+          <option value="kilometer">Kilometer</option>
+          <option value="meter">Meter</option>
+          <option value="Centimeter">Centimeter</option>
+        </select>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
